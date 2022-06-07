@@ -10,18 +10,18 @@ Il componente aggiuntivo contiene le seguenti funzioni:
 		
 2) zetaV: 		come zetaL ma per la fase vapore
 
-3) phiRKS_L:	funzione che restituisce il coefficiente di fugacità previsto dall’equazione cubica RKS per la fase liquida di un composto puro a partire dai valori:	𝑇𝑐, 𝑝𝑐, 𝜔, 𝑇, 𝑝
+3) phiRKS_L:	funzione che restituisce il coefficiente di fugacità previsto dall’equazione cubica RKS per la fase liquida di un composto puro a partire dai valori: Tc,pc,w,T,p
 				!!! Le pressioni vanno fornite in [Pa]
 
 4) phiRKS_V:	come phiRKS_L ma per la fase vapore
 
-5) phiPR_L:		funzione che restituisce il coefficiente di fugacità previsto dall’equazione cubica PR per la fase liquida di un composto puro a partire dai valori:	𝑇𝑐, 𝑝𝑐, 𝜔, 𝑇, 𝑝
+5) phiPR_L:		funzione che restituisce il coefficiente di fugacità previsto dall’equazione cubica PR per la fase liquida di un composto puro a partire dai valori: Tc,pc,w,T,p
 				!!! Le pressioni vanno fornite in [Pa]
 
 6) phiPR_V:		come phiPR_L ma per la fase vapore
 
-7) phiRKSmix_L:	funzione che restituisce il coefficiente di fugacità previsto dall’equazione cubica RKS per la fase liquida di un composto in miscela a partire dai valori:	𝑖, x , 𝑁𝐶, 𝑇𝑐 , 𝑝𝑐 , 𝜔 , 𝑇, 𝑝
-				Dove i è l’indice della specie di cui si vuole calcolare 𝛷
+7) phiRKSmix_L:	funzione che restituisce il coefficiente di fugacità previsto dall’equazione cubica RKS per la fase liquida di un composto in miscela a partire dai valori i,x,NC,Tc,pc,w,T,p dove:
+				i è l’indice della specie di cui si vuole calcolare phi
 				x è il vettore delle frazioni molari
 				Tc è il vettore delle temperature critiche
 				pc è il vettore delle pressioni critiche
@@ -31,8 +31,8 @@ Il componente aggiuntivo contiene le seguenti funzioni:
 
 8) phiRKSmix_V:	come phiRKSmix_L ma per la fase vapore
 
-9) phiPRmix_L:	funzione che restituisce il coefficiente di fugacità previsto dall’equazione cubica PR per la fase liquida di un composto in miscela a partire dai valori:	𝑖, x , 𝑁𝐶, 𝑇𝑐 , 𝑝𝑐 , 𝜔 , 𝑇, 𝑝
-				Dove i è l’indice della specie di cui si vuole calcolare 𝛷
+9) phiPRmix_L:	funzione che restituisce il coefficiente di fugacità previsto dall’equazione cubica PR per la fase liquida di un composto in miscela a partire dai valori i,x,NC,Tc,pc,w,T,p dove:
+				i è l’indice della specie di cui si vuole calcolare phi
 				x è il vettore delle frazioni molari
 				Tc è il vettore delle temperature critiche
 				pc è il vettore delle pressioni critiche
