@@ -41,3 +41,6 @@ Il componente aggiuntivo contiene le seguenti funzioni:
 				!!! Le pressioni vanno fornite in [Pa]
 
 10) phiPRmix_V:	come phiPRmix_L ma per la fase vapore
+
+
+Per qualsiasi problema o bug si contatti lo sviluppatore all'indirizzo: eliaferretti@outlook.it
