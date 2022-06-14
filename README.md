@@ -1,46 +1,213 @@
-# EOS-for-Excel
-Libreria contenente alcune funzioni per la determinazione di grandezze stimate con le EoS cubiche.
-
 Elia Ferretti © 2022
 
 Il componente aggiuntivo contiene le seguenti funzioni:
 
-1) zetaL:		funzione che restituisce il fattore di comprimibilità della fase liquida a partire dai valori di input:
-				a,b,c,d definiti come coefficienti della cubica:  a*z^3 + b*z^2 + c*z + d = 0
-		
-2) zetaV: 		come zetaL ma per la fase vapore
+!!TUTTE LE VARIABILI VANNO FORNITE (E VENGONO RESTITUITE) NELLE UNITA' DEL SISTEMA INTERNAZIONALE!!
 
-3) phiRKS_L:	funzione che restituisce il coefficiente di fugacità previsto dall’equazione cubica RKS per la fase liquida di un composto puro a partire dai valori: Tc,pc,w,T,p
-				!!! Le pressioni vanno fornite in [Pa]
+1) zeta_VdW:		funzione che restituisce il fattore di comprimibilità [-] previsto dall’equazione cubica VdW di un composto puro a partire dai valori Tc,pc,T,pressure,state dove:
+					Tc 			[K] è la temperatura critica del composto puro
+					pc 			[Pa] è la pressione critica del composto puro
+					T 			[K] è la temperatura
+					pressure 	[Pa] è la pressione
+					state 		[-] è una stringa rappresentante la fase del composto ("V" o "L")
+				
+2) zeta_RK:			funzione che restituisce il fattore di comprimibilità [-] previsto dall’equazione cubica RK di un composto puro a partire dai valori Tc,pc,T,pressure,state dove:
+					Tc 			[K] è la temperatura critica del composto puro
+					pc 			[Pa] è la pressione critica del composto puro
+					T 			[K] è la temperatura
+					pressure 	[Pa] è la pressione
+					state 		[-] è una stringa rappresentante la fase del composto ("V" o "L")		
+				
+3) zeta_RKS:		funzione che restituisce il fattore di comprimibilità [-] previsto dall’equazione cubica RKS di un composto puro a partire dai valori Tc,pc,w,T,pressure,state dove:
+					Tc 			[K] è la temperatura critica del composto puro
+					pc 			[Pa] è la pressione critica del composto puro
+					w 			[-] è il fattore acentrico di Pitzer del composto puro
+					T 			[K] è la temperatura
+					pressure 	[Pa] è la pressione
+					state 		[-] è una stringa rappresentante la fase del composto ("V" o "L")
+				
+4) zeta_PR:			funzione che restituisce il fattore di comprimibilità [-] previsto dall’equazione cubica PR di un composto puro a partire dai valori Tc,pc,w,T,pressure,state dove:
+					Tc 			[K] è la temperatura critica del composto puro
+					pc 			[Pa] è la pressione critica del composto puro
+					w 			[-] è il fattore acentrico di Pitzer del composto puro
+					T 			[K] è la temperatura
+					pressure 	[Pa] è la pressione
+					state 		[-] è una stringa rappresentante la fase del composto ("V" o "L")
 
-4) phiRKS_V:	come phiRKS_L ma per la fase vapore
+5) phi_VdW:			funzione che restituisce il coefficiente di fugacità [-] previsto dall’equazione cubica VdW di un composto puro a partire dai valori Tc,pc,T,pressure,state dove:
+					Tc 			[K] è la temperatura critica del composto puro
+					pc 			[Pa] è la pressione critica del composto puro
+					T 			[K] è la temperatura
+					pressure 	[Pa] è la pressione
+					state 		[-] è una stringa rappresentante la fase del composto ("V" o "L")
+				
+6) phi_RK:			funzione che restituisce il coefficiente di fugacità [-] previsto dall’equazione cubica RK di un composto puro a partire dai valori Tc,pc,T,pressure,state dove:
+					Tc 			[K] è la temperatura critica del composto puro
+					pc 			[Pa] è la pressione critica del composto puro
+					T 			[K] è la temperatura
+					pressure 	[Pa] è la pressione
+					state 		[-] è una stringa rappresentante la fase del composto ("V" o "L")		
+				
+7) phi_RKS:			funzione che restituisce il coefficiente di fugacità [-] previsto dall’equazione cubica RKS di un composto puro a partire dai valori Tc,pc,w,T,pressure,state dove:
+					Tc 			[K] è la temperatura critica del composto puro
+					pc 			[Pa] è la pressione critica del composto puro
+					w 			[-] è il fattore acentrico di Pitzer del composto puro
+					T 			[K] è la temperatura
+					pressure 	[Pa] è la pressione
+					state 		[-] è una stringa rappresentante la fase del composto ("V" o "L")
+				
+8) phi_PR:			funzione che restituisce il coefficiente di fugacità [-] previsto dall’equazione cubica PR di un composto puro a partire dai valori Tc,pc,w,T,pressure,state dove:
+					Tc 			[K] è la temperatura critica del composto puro
+					pc 			[Pa] è la pressione critica del composto puro
+					w 			[-] è il fattore acentrico di Pitzer del composto puro
+					T 			[K] è la temperatura
+					pressure 	[Pa] è la pressione
+					state 		[-] è una stringa rappresentante la fase del composto ("V" o "L")
 
-5) phiPR_L:		funzione che restituisce il coefficiente di fugacità previsto dall’equazione cubica PR per la fase liquida di un composto puro a partire dai valori: Tc,pc,w,T,p
-				!!! Le pressioni vanno fornite in [Pa]
+9) hR_VdW:			funzione che restituisce l' entalpia residua [J/mol] prevista dall’equazione cubica VdW di un composto puro a partire dai valori Tc,pc,T,pressure,state dove:
+					Tc 			[K] è la temperatura critica del composto puro
+					pc 			[Pa] è la pressione critica del composto puro
+					T 			[K] è la temperatura
+					pressure 		[Pa] è la pressione
+					state 		[-] è una stringa rappresentante la fase del composto ("V" o "L")
+				
+10) hR_RK:			funzione che restituisce l' entalpia residua [J/mol] prevista dall’equazione cubica RK di un composto puro a partire dai valori Tc,pc,T,pressure,state dove:
+					Tc 			[K] è la temperatura critica del composto puro
+					pc 			[Pa] è la pressione critica del composto puro
+					T 			[K] è la temperatura
+					pressure 	[Pa] è la pressione
+					state 		[-] è una stringa rappresentante la fase del composto ("V" o "L")		
+				
+11) hR_RKS:			funzione che restituisce l' entalpia residua [J/mol] prevista dall’equazione cubica RKS di un composto puro a partire dai valori Tc,pc,w,T,pressure,state dove:
+					Tc 			[K] è la temperatura critica del composto puro
+					pc 			[Pa] è la pressione critica del composto puro
+					w 			[-] è il fattore acentrico di Pitzer del composto puro
+					T 			[K] è la temperatura
+					pressure 	[Pa] è la pressione
+					state 		[-] è una stringa rappresentante la fase del composto ("V" o "L")
+					
+12) hR_PR:			funzione che restituisce l' entalpia residua [J/mol] prevista dall’equazione cubica PR di un composto puro a partire dai valori Tc,pc,w,T,pressure,state dove:
+					Tc 			[K] è la temperatura critica del composto puro
+					pc 			[Pa] è la pressione critica del composto puro
+					w 			[-] è il fattore acentrico di Pitzer del composto puro
+					T 			[K] è la temperatura
+					pressure 	[Pa] è la pressione
+					state 		[-] è una stringa rappresentante la fase del composto ("V" o "L")
 
-6) phiPR_V:		come phiPR_L ma per la fase vapore
+13) zeta_VdWmix:	funzione che restituisce il fattore di comprimibilità [-] previsto dall’equazione cubica VdW di un composto puro a partire dai valori x,NC,Tc,pc,T,pressure,state dove:
+					x		[-] è il vettore delle composizioni
+					NC		[-] è il numero di componenti (dimensione del vettore x)
+					Tc 		[K] è il vettore delle temperature critiche dei composti puri
+					pc 		[Pa] è il vettore delle pressioni critiche dei composti puri
+					T 		[K] è la temperatura
+					p 		[Pa] è la pressione
+					state 	[-] è una stringa rappresentante la fase della miscela ("V" o "L")
+				
+14) zeta_RKmix:		funzione che restituisce il fattore di comprimibilità [-] previsto dall’equazione cubica RK di un composto puro a partire dai valori x,NC,Tc,pc,T,pressure,state dove:
+					x		[-] è il vettore delle composizioni
+					NC		[-] è il numero di componenti (dimensione del vettore x)
+					Tc 		[K] è il vettore delle temperature critiche dei composti puri
+					pc 		[Pa] è il vettore delle pressioni critiche dei composti puri
+					T 		[K] è la temperatura
+					p 		[Pa] è la pressione
+					state 	[-] è una stringa rappresentante la fase della miscela ("V" o "L")	
+					
+15) zeta_RKSmix:	funzione che restituisce il fattore di comprimibilità [-] previsto dall’equazione cubica RKS di un composto puro a partire dai valori x,NC,Tc,pc,w,T,pressure,state dove:
+					x		[-] è il vettore delle composizioni
+					NC		[-] è il numero di componenti (dimensione del vettore x)
+					Tc 		[K] è il vettore delle temperature critiche dei composti puri
+					pc 		[Pa] è il vettore delle pressioni critiche dei composti puri
+					w 		[-] è il vettore dei fattori acentrici di Pitzer dei composti puri
+					T 		[K] è la temperatura
+					p 		[Pa] è la pressione
+					state 	[-] è una stringa rappresentante la fase della miscela ("V" o "L")	
+					
+16) zeta_PRmix:		funzione che restituisce il fattore di comprimibilità [-] previsto dall’equazione cubica PR di un composto puro a partire dai valori x,NC,Tc,pc,w,T,pressure,state dove:
+					x		[-] è il vettore delle composizioni
+					NC		[-] è il numero di componenti (dimensione del vettore x)
+					Tc 		[K] è il vettore delle temperature critiche dei composti puri
+					pc 		[Pa] è il vettore delle pressioni critiche dei composti puri
+					w 		[-] è il vettore dei fattori acentrici di Pitzer dei composti puri
+					T 		[K] è la temperatura
+					p 		[Pa] è la pressione
+					state 	[-] è una stringa rappresentante la fase della miscela ("V" o "L")	
 
-7) phiRKSmix_L:	funzione che restituisce il coefficiente di fugacità previsto dall’equazione cubica RKS per la fase liquida di un composto in miscela a partire dai valori i,x,NC,Tc,pc,w,T,p dove:
-				i è l’indice della specie di cui si vuole calcolare phi
-				x è il vettore delle frazioni molari
-				Tc è il vettore delle temperature critiche
-				pc è il vettore delle pressioni critiche
-				w è il vettore dei fattori acentrici
-				NC è il numero di componenti della miscela
-				!!! Le pressioni vanno fornite in [Pa]
+17) phi_VdWmix:		funzione che restituisce il coefficiente di fugacità [-] previsto dall’equazione cubica VdW di un composto puro a partire dai valori index,x,NC,Tc,pc,T,pressure,state dove:
+					index   [-] è l'indice della specie di interesse (indice rispetto a uno dei seguenti vettori, dev'essere un numero tra 1 e NC)
+					x		[-] è il vettore delle composizioni
+					NC		[-] è il numero di componenti (dimensione del vettore x)
+					Tc 		[K] è il vettore delle temperature critiche dei composti puri
+					pc 		[Pa] è il vettore delle pressioni critiche dei composti puri
+					T 		[K] è la temperatura
+					p 		[Pa] è la pressione
+					state 	[-] è una stringa rappresentante la fase della miscela ("V" o "L")	
+				
+18) phi_RKmix:		funzione che restituisce il coefficiente di fugacità [-] previsto dall’equazione cubica RK di un composto puro a partire dai valori index,x,NC,Tc,pc,T,pressure,state dove:
+					index   [-] è l'indice della specie di interesse (indice rispetto a uno dei seguenti vettori, dev'essere un numero tra 1 e NC)
+					x		[-] è il vettore delle composizioni
+					NC		[-] è il numero di componenti (dimensione del vettore x)
+					Tc 		[K] è il vettore delle temperature critiche dei composti puri
+					pc 		[Pa] è il vettore delle pressioni critiche dei composti puri
+					T 		[K] è la temperatura
+					p 		[Pa] è la pressione
+					state 	[-] è una stringa rappresentante la fase della miscela ("V" o "L")	
+					
+19) phi_RKSmix:		funzione che restituisce il coefficiente di fugacità [-] previsto dall’equazione cubica RKS di un composto puro a partire dai valori index,x,NC,Tc,pc,w,T,pressure,state dove:
+					index   [-] è l'indice della specie di interesse (indice rispetto a uno dei seguenti vettori, dev'essere un numero tra 1 e NC)
+					Tc 		[K] è la temperatura critica del composto puro
+					pc 		[Pa] è la pressione critica del composto puro
+					w 		[-] è il fattore acentrico di Pitzer del composto puro
+					T 		[K] è la temperatura
+					p 		[Pa] è la pressione
+					state 	[-] è una stringa rappresentante la fase del composto ("V" o "L")
+				
+20) phi_PRmix:		funzione che restituisce il coefficiente di fugacità [-] previsto dall’equazione cubica PR di un composto puro a partire dai valori index,x,NC,Tc,pc,w,T,pressure,state dove:
+					index   [-] è l'indice della specie di interesse (indice rispetto a uno dei seguenti vettori, dev'essere un numero tra 1 e NC)
+					Tc 		[K] è la temperatura critica del composto puro
+					pc 		[Pa] è la pressione critica del composto puro
+					w 		[-] è il fattore acentrico di Pitzer del composto puro
+					T 		[K] è la temperatura
+					p 		[Pa] è la pressione
+					state 	[-] è una stringa rappresentante la fase del composto ("V" o "L")
 
-8) phiRKSmix_V:	come phiRKSmix_L ma per la fase vapore
-
-9) phiPRmix_L:	funzione che restituisce il coefficiente di fugacità previsto dall’equazione cubica PR per la fase liquida di un composto in miscela a partire dai valori i,x,NC,Tc,pc,w,T,p dove:
-				i è l’indice della specie di cui si vuole calcolare phi
-				x è il vettore delle frazioni molari
-				Tc è il vettore delle temperature critiche
-				pc è il vettore delle pressioni critiche
-				w è il vettore dei fattori acentrici
-				NC è il numero di componenti della miscela
-				!!! Le pressioni vanno fornite in [Pa]
-
-10) phiPRmix_V:	come phiPRmix_L ma per la fase vapore
+21) hR_VdWmix:		funzione che restituisce l' entalpia residua [J/mol] prevista dall’equazione cubica VdW di un composto puro a partire dai valori x,NC,Tc,pc,T,pressure,state dove:
+					x		[-] è il vettore delle composizioni
+					NC		[-] è il numero di componenti (dimensione del vettore x)
+					Tc 		[K] è il vettore delle temperature critiche dei composti puri
+					pc 		[Pa] è il vettore delle pressioni critiche dei composti puri
+					T 		[K] è la temperatura
+					p 		[Pa] è la pressione
+					state 	[-] è una stringa rappresentante la fase della miscela ("V" o "L")	
+				
+22) hR_RKmix:		funzione che restituisce l' entalpia residua [J/mol] prevista dall’equazione cubica RK di un composto puro a partire dai valori x,NC,Tc,pc,T,pressure,state dove:
+					x		[-] è il vettore delle composizioni
+					NC		[-] è il numero di componenti (dimensione del vettore x)
+					Tc 		[K] è il vettore delle temperature critiche dei composti puri
+					pc 		[Pa] è il vettore delle pressioni critiche dei composti puri
+					T 		[K] è la temperatura
+					p 		[Pa] è la pressione
+					state 	[-] è una stringa rappresentante la fase della miscela ("V" o "L")	
+				
+23) hR_RKSmix:		funzione che restituisce l' entalpia residua [J/mol] prevista dall’equazione cubica RKS di un composto puro a partire dai valori x,NC,Tc,pc,w,T,pressure,state dove:
+					x		[-] è il vettore delle composizioni
+					NC		[-] è il numero di componenti (dimensione del vettore x)
+					Tc 		[K] è il vettore delle temperature critiche dei composti puri
+					pc 		[Pa] è il vettore delle pressioni critiche dei composti puri
+					w 		[-] è il vettore dei fattori acentrici di Pitzer dei composti puri
+					T 		[K] è la temperatura
+					p 		[Pa] è la pressione
+					state 	[-] è una stringa rappresentante la fase della miscela ("V" o "L")	
+				
+24) hR_PRmix:		funzione che restituisce l' entalpia residua [J/mol] prevista dall’equazione cubica PR di un composto puro a partire dai valori x,NC,Tc,pc,w,T,pressure,state dove:
+					x		[-] è il vettore delle composizioni
+					NC		[-] è il numero di componenti (dimensione del vettore x)
+					Tc 		[K] è il vettore delle temperature critiche dei composti puri
+					pc 		[Pa] è il vettore delle pressioni critiche dei composti puri
+					w 		[-] è il vettore dei fattori acentrici di Pitzer dei composti puri
+					T 		[K] è la temperatura
+					p 		[Pa] è la pressione
+					state 	[-] è una stringa rappresentante la fase della miscela ("V" o "L")	
 
 
 Per qualsiasi problema o bug si contatti lo sviluppatore all'indirizzo: eliaferretti@outlook.it
+
