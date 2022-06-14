@@ -1641,7 +1641,7 @@ Function zeta_RKSmix(x As Variant, NC As Integer, Tc As Variant, pc As Variant, 
 End Function
 
 
-Function phi_PRmix(x As Variant, NC As Integer, Tc As Variant, pc As Variant, w As Variant, T As Double, pressure As Double, state As string) As Double
+Function zeta_PRmix(x As Variant, NC As Integer, Tc As Variant, pc As Variant, w As Variant, T As Double, pressure As Double, state As string) As Double
     Dim amix As Double
     Dim bmix As Double
     Dim a As Double
@@ -1760,7 +1760,7 @@ Function phi_PRmix(x As Variant, NC As Integer, Tc As Variant, pc As Variant, w 
 End Function
 
 
-Function phi_VdWmix(indicespecie As Integer, x As Variant, NC As Integer, Tc As Variant, pc As Variant, T As Double, pressure As Double, state As string) As Double
+Function phi_VdWmix(index As Integer, x As Variant, NC As Integer, Tc As Variant, pc As Variant, T As Double, pressure As Double, state As string) As Double
     Dim amix As Double
     Dim bmix As Double
     Dim a As Double
@@ -1791,8 +1791,8 @@ Function phi_VdWmix(indicespecie As Integer, x As Variant, NC As Integer, Tc As 
     Next
     a = amix * pressure / (R * T) ^ (2)
     b = bmix * pressure / (R * T)
-    Ai = Ac(indicespecie) * pressure / (R * T) ^ 2
-    Bi = Bc(indicespecie) * pressure / (R * T)
+    Ai = Ac(index) * pressure / (R * T) ^ 2
+    Bi = Bc(index) * pressure / (R * T)
  
     Dim p As Double
     Dim q As Double
@@ -1882,7 +1882,7 @@ Function phi_VdWmix(indicespecie As Integer, x As Variant, NC As Integer, Tc As 
 End Function
 
 
-Function phi_RKmix(indicespecie As Integer, x As Variant, NC As Integer, Tc As Variant, pc As Variant, T As Double, pressure As Double, state As string) As Double
+Function phi_RKmix(index As Integer, x As Variant, NC As Integer, Tc As Variant, pc As Variant, T As Double, pressure As Double, state As string) As Double
     Dim amix As Double
     Dim bmix As Double
     Dim a As Double
@@ -1914,8 +1914,8 @@ Function phi_RKmix(indicespecie As Integer, x As Variant, NC As Integer, Tc As V
     Next
     a = amix * pressure / (R * T) ^ (2)
     b = bmix * pressure / (R * T)
-    Ai = Ac(indicespecie) * pressure / (R * T) ^ 2
-    Bi = Bc(indicespecie) * pressure / (R * T)
+    Ai = Ac(index) * pressure / (R * T) ^ 2
+    Bi = Bc(index) * pressure / (R * T)
  
     Dim p As Double
     Dim q As Double
@@ -2004,7 +2004,7 @@ Function phi_RKmix(indicespecie As Integer, x As Variant, NC As Integer, Tc As V
 End Function
 
 
-Function phi_RKSmix(indicespecie As Integer, x As Variant, NC As Integer, Tc As Variant, pc As Variant, w As Variant, T As Double, pressure As Double, state As string) As Double
+Function phi_RKSmix(index As Integer, x As Variant, NC As Integer, Tc As Variant, pc As Variant, w As Variant, T As Double, pressure As Double, state As string) As Double
     Dim amix As Double
     Dim bmix As Double
     Dim a As Double
@@ -2038,8 +2038,8 @@ Function phi_RKSmix(indicespecie As Integer, x As Variant, NC As Integer, Tc As 
     Next
     a = amix * pressure / (R * T) ^ (2)
     b = bmix * pressure / (R * T)
-    Ai = Ac(indicespecie) * pressure / (R * T) ^ 2
-    Bi = Bc(indicespecie) * pressure / (R * T)
+    Ai = Ac(index) * pressure / (R * T) ^ 2
+    Bi = Bc(index) * pressure / (R * T)
  
     Dim p As Double
     Dim q As Double
@@ -2128,7 +2128,7 @@ Function phi_RKSmix(indicespecie As Integer, x As Variant, NC As Integer, Tc As 
 End Function
 
 
-Function phi_PRmix(indicespecie As Integer, x As Variant, NC As Integer, Tc As Variant, pc As Variant, w As Variant, T As Double, pressure As Double, state As string) As Double
+Function phi_PRmix(index As Integer, x As Variant, NC As Integer, Tc As Variant, pc As Variant, w As Variant, T As Double, pressure As Double, state As string) As Double
     Dim amix As Double
     Dim bmix As Double
     Dim a As Double
@@ -2162,8 +2162,8 @@ Function phi_PRmix(indicespecie As Integer, x As Variant, NC As Integer, Tc As V
     Next
     a = amix * pressure / (R * T) ^ (2)
     b = bmix * pressure / (R * T)
-    Ai = Ac(indicespecie) * pressure / (R * T) ^ 2
-    Bi = Bc(indicespecie) * pressure / (R * T)
+    Ai = Ac(index) * pressure / (R * T) ^ 2
+    Bi = Bc(index) * pressure / (R * T)
  
     Dim p As Double
     Dim q As Double
