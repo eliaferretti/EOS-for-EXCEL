@@ -1289,6 +1289,477 @@ Function hR_PR(Tc As Double, pc As Double, w As Double, T As Double, pressure As
 End Function
 
 
+Function zeta_VdWmix(x As Variant, NC As Integer, Tc As Variant, pc As Variant, w As Variant, T As Double, pressure As Double, state As string) As Double
+    Dim amix As Double
+    Dim bmix As Double
+    Dim a As Double
+    Dim b As Double
+    Dim R As Double
+    Dim Ac(1000) As Variant
+    Dim Bc(1000) As Variant
+    Dim Tr As Double
+    Dim k As Variant
+    Dim i As Integer
+    Dim j As Integer
+    
+    amix = 0
+    bmix = 0
+    R = 8.3144621
+    For i = 1 To NC
+        Tr = T / Tc(i)
+        Ac(i) = 0.421875 * (R * Tc(i)) ^ (2) / pc(i)
+        Bc(i) = 0.125 * R * Tc(i) / pc(i)
+    Next
+    For i = 1 To NC
+        For j = 1 To NC
+            amix = amix + x(i) * x(j) * (Ac(i) * Ac(j)) ^ (0.5)
+            bmix = bmix + x(i) * x(j) * (Bc(i) + Bc(j)) / 2
+        Next
+    Next
+    a = amix * pressure / (R * T) ^ (2)
+    b = bmix * pressure / (R * T)
+ 
+    Dim p As Double
+    Dim q As Double
+    Dim u As Double
+    Dim v As Double
+    Dim y1 As Double
+    Dim y2 As Double
+    Dim y3 As Double
+    Dim det As Double
+    Dim aus As Variant
+    Dim teta As Double
+    Dim zeta1 As Double
+    Dim zeta2 As Double
+    Dim zeta3 As Double
+    Dim beta As Double
+    Dim gamma As Double
+    Dim delta As Double
+    Dim pig As Double
+    Dim zeta As Double
+    pig = 3.14159265353589
+	
+	beta = - 1 - b
+    gamma = a
+    delta = -a * b
+     
+    p = gamma - (beta) ^ (2) / 3
+    q = 2 * (beta) ^ (3) / 27 - beta * gamma / 3 + delta
+    det = (q) ^ (2) / 4 + (p) ^ (3) / 27
+   
+    If det >= 0 Then
+        zeta1 = -q / 2 + (det) ^ (0.5)
+        zeta2 = -q / 2 - (det) ^ (0.5)
+        Dim coeff1 As Integer
+        Dim coeff2 As Integer
+        coeff1 = 1
+        coeff2 = 1
+        If zeta1 < 0 Then
+            zeta1 = -zeta1
+            coeff1 = -1
+        End If
+        If zeta2 < 0 Then
+            zeta2 = -zeta2
+            coeff2 = -1
+        End If
+        u = coeff1 * (zeta1) ^ (1 / 3)
+        v = coeff2 * (zeta2) ^ (1 / 3)
+        y1 = u + v
+        aus = y1 - beta / 3
+    Else
+        If q < 0 Then
+            teta = Atn(-2 * (-det) ^ (0.5) / q)
+        Else
+            teta = pig + Atn(-2 * (-det) ^ (0.5) / q)
+        End If
+      
+        y1 = 2 * (-p / 3) ^ (0.5) * Cos(teta / 3)
+        y2 = 2 * (-p / 3) ^ (0.5) * Cos((teta + 2 * pig) / 3)
+        y3 = 2 * (-p / 3) ^ (0.5) * Cos((teta + 4 * pig) / 3)
+        zeta1 = y1 - beta / 3
+        zeta2 = y2 - beta / 3
+        zeta3 = y3 - beta / 3
+		
+        aus = zeta1
+        If state = "L" Then
+            'LIQUID PHASE
+            If zeta2 < aus Then
+                aus = zeta2
+            End If
+            If zeta3 < aus Then
+                aus = zeta3
+            End If
+        ElseIf state = "V" Then
+            'VAPOUR PHASE
+            If zeta2 > aus Then
+            aus = zeta2
+            End If
+            If zeta3 > aus Then
+                aus = zeta3
+            End If
+        End If
+    End If
+    zeta = aus
+
+    zeta_VdWmix = zeta
+End Function
+
+
+Function zeta_RKmix(x As Variant, NC As Integer, Tc As Variant, pc As Variant, w As Variant, T As Double, pressure As Double, state As string) As Double
+    Dim amix As Double
+    Dim bmix As Double
+    Dim a As Double
+    Dim b As Double
+    Dim R As Double
+    Dim Ac(1000) As Variant
+    Dim Bc(1000) As Variant
+    Dim Tr As Double
+    Dim k As Variant
+    Dim i As Integer
+    Dim j As Integer
+    
+    amix = 0
+    bmix = 0
+    R = 8.3144621
+    For i = 1 To NC
+        Tr = T / Tc(i)
+        k = 1 / (Tr)^(0.5)
+        Ac(i) = 0.42748 * (R * Tc(i)) ^ (2) * k / pc(i)
+        Bc(i) = 0.08664 * R * Tc(i) / pc(i)
+    Next
+    For i = 1 To NC
+        For j = 1 To NC
+            amix = amix + x(i) * x(j) * (Ac(i) * Ac(j)) ^ (0.5)
+            bmix = bmix + x(i) * x(j) * (Bc(i) + Bc(j)) / 2
+        Next
+    Next
+    a = amix * pressure / (R * T) ^ (2)
+    b = bmix * pressure / (R * T)
+ 
+    Dim p As Double
+    Dim q As Double
+    Dim u As Double
+    Dim v As Double
+    Dim y1 As Double
+    Dim y2 As Double
+    Dim y3 As Double
+    Dim det As Double
+    Dim aus As Variant
+    Dim teta As Double
+    Dim zeta1 As Double
+    Dim zeta2 As Double
+    Dim zeta3 As Double
+    Dim beta As Double
+    Dim gamma As Double
+    Dim delta As Double
+    Dim pig As Double
+    Dim zeta As Double
+    pig = 3.14159265353589
+    
+    beta = -1
+    gamma = a - b - (b) ^ (2)
+    delta = -a * b
+     
+    p = gamma - (beta) ^ (2) / 3
+    q = 2 * (beta) ^ (3) / 27 - beta * gamma / 3 + delta
+    det = (q) ^ (2) / 4 + (p) ^ (3) / 27
+   
+    If det >= 0 Then
+        zeta1 = -q / 2 + (det) ^ (0.5)
+        zeta2 = -q / 2 - (det) ^ (0.5)
+        Dim coeff1 As Integer
+        Dim coeff2 As Integer
+        coeff1 = 1
+        coeff2 = 1
+        If zeta1 < 0 Then
+            zeta1 = -zeta1
+            coeff1 = -1
+        End If
+        If zeta2 < 0 Then
+            zeta2 = -zeta2
+            coeff2 = -1
+        End If
+        u = coeff1 * (zeta1) ^ (1 / 3)
+        v = coeff2 * (zeta2) ^ (1 / 3)
+        y1 = u + v
+        aus = y1 - beta / 3
+    Else
+        If q < 0 Then
+            teta = Atn(-2 * (-det) ^ (0.5) / q)
+        Else
+            teta = pig + Atn(-2 * (-det) ^ (0.5) / q)
+        End If
+      
+        y1 = 2 * (-p / 3) ^ (0.5) * Cos(teta / 3)
+        y2 = 2 * (-p / 3) ^ (0.5) * Cos((teta + 2 * pig) / 3)
+        y3 = 2 * (-p / 3) ^ (0.5) * Cos((teta + 4 * pig) / 3)
+        zeta1 = y1 - beta / 3
+        zeta2 = y2 - beta / 3
+        zeta3 = y3 - beta / 3
+		
+        aus = zeta1
+        If state = "L" Then
+            'LIQUID PHASE
+            If zeta2 < aus Then
+                aus = zeta2
+            End If
+            If zeta3 < aus Then
+                aus = zeta3
+            End If
+        ElseIf state = "V" Then
+            'VAPOUR PHASE
+            If zeta2 > aus Then
+            aus = zeta2
+            End If
+            If zeta3 > aus Then
+                aus = zeta3
+            End If
+        End If
+    End If
+    zeta = aus
+ 
+    zeta_RKmix = zeta
+End Function
+
+
+Function zeta_RKSmix(x As Variant, NC As Integer, Tc As Variant, pc As Variant, w As Variant, T As Double, pressure As Double, state As string) As Double
+    Dim amix As Double
+    Dim bmix As Double
+    Dim a As Double
+    Dim b As Double
+    Dim R As Double
+    Dim Ac(1000) As Variant
+    Dim Bc(1000) As Variant
+    Dim S As Double
+    Dim Tr As Double
+    Dim k As Variant
+    Dim i As Integer
+    Dim j As Integer
+    
+    amix = 0
+    bmix = 0
+    R = 8.3144621
+    For i = 1 To NC
+        S = 0.48 + 1.574 * w(i) - 0.176 * (w(i)) ^ (2)
+        Tr = T / Tc(i)
+        k = (1 + S * (1 - (Tr) ^ (0.5))) ^ (2)
+        Ac(i) = 0.42748 * (R * Tc(i)) ^ (2) * k / pc(i)
+        Bc(i) = 0.08664 * R * Tc(i) / pc(i)
+    Next
+    For i = 1 To NC
+        For j = 1 To NC
+            amix = amix + x(i) * x(j) * (Ac(i) * Ac(j)) ^ (0.5)
+            bmix = bmix + x(i) * x(j) * (Bc(i) + Bc(j)) / 2
+        Next
+    Next
+    a = amix * pressure / (R * T) ^ (2)
+    b = bmix * pressure / (R * T)
+ 
+    Dim p As Double
+    Dim q As Double
+    Dim u As Double
+    Dim v As Double
+    Dim y1 As Double
+    Dim y2 As Double
+    Dim y3 As Double
+    Dim det As Double
+    Dim aus As Variant
+    Dim teta As Double
+    Dim zeta1 As Double
+    Dim zeta2 As Double
+    Dim zeta3 As Double
+    Dim beta As Double
+    Dim gamma As Double
+    Dim delta As Double
+    Dim pig As Double
+    Dim zeta As Double
+    pig = 3.14159265353589
+    
+    beta = -1
+    gamma = a - b - (b) ^ (2)
+    delta = -a * b
+     
+    p = gamma - (beta) ^ (2) / 3
+    q = 2 * (beta) ^ (3) / 27 - beta * gamma / 3 + delta
+    det = (q) ^ (2) / 4 + (p) ^ (3) / 27
+   
+    If det >= 0 Then
+        zeta1 = -q / 2 + (det) ^ (0.5)
+        zeta2 = -q / 2 - (det) ^ (0.5)
+        Dim coeff1 As Integer
+        Dim coeff2 As Integer
+        coeff1 = 1
+        coeff2 = 1
+        If zeta1 < 0 Then
+            zeta1 = -zeta1
+            coeff1 = -1
+        End If
+        If zeta2 < 0 Then
+            zeta2 = -zeta2
+            coeff2 = -1
+        End If
+        u = coeff1 * (zeta1) ^ (1 / 3)
+        v = coeff2 * (zeta2) ^ (1 / 3)
+        y1 = u + v
+        aus = y1 - beta / 3
+    Else
+        If q < 0 Then
+            teta = Atn(-2 * (-det) ^ (0.5) / q)
+        Else
+            teta = pig + Atn(-2 * (-det) ^ (0.5) / q)
+        End If
+      
+        y1 = 2 * (-p / 3) ^ (0.5) * Cos(teta / 3)
+        y2 = 2 * (-p / 3) ^ (0.5) * Cos((teta + 2 * pig) / 3)
+        y3 = 2 * (-p / 3) ^ (0.5) * Cos((teta + 4 * pig) / 3)
+        zeta1 = y1 - beta / 3
+        zeta2 = y2 - beta / 3
+        zeta3 = y3 - beta / 3
+		
+        aus = zeta1
+        If state = "L" Then
+            'LIQUID PHASE
+            If zeta2 < aus Then
+                aus = zeta2
+            End If
+            If zeta3 < aus Then
+                aus = zeta3
+            End If
+        ElseIf state = "V" Then
+            'VAPOUR PHASE
+            If zeta2 > aus Then
+            aus = zeta2
+            End If
+            If zeta3 > aus Then
+                aus = zeta3
+            End If
+        End If
+    End If
+    zeta = aus
+ 
+    zeta_RKSmix = zeta
+End Function
+
+
+Function phi_PRmix(x As Variant, NC As Integer, Tc As Variant, pc As Variant, w As Variant, T As Double, pressure As Double, state As string) As Double
+    Dim amix As Double
+    Dim bmix As Double
+    Dim a As Double
+    Dim b As Double
+    Dim R As Double
+    Dim Ac(1000) As Variant
+    Dim Bc(1000) As Variant
+    Dim S As Double
+    Dim Tr As Double
+    Dim k As Variant
+    Dim i As Integer
+    Dim j As Integer
+    
+    amix = 0
+    bmix = 0
+    R = 8.3144621
+    For i = 1 To NC
+        S = 0.37464 + 1.54226 * w(i) - 0.26992 * (w(i)) ^ (2)
+        Tr = T / Tc(i)
+        k = (1 + S * (1 - (Tr) ^ (0.5))) ^ (2)
+        Ac(i) = 0.45724 * (R * Tc(i)) ^ (2) * k / pc(i)
+        Bc(i) = 0.0778 * R * Tc(i) / pc(i)
+    Next
+    For i = 1 To NC
+        For j = 1 To NC
+            amix = amix + x(i) * x(j) * (Ac(i) * Ac(j)) ^ (0.5)
+            bmix = bmix + x(i) * x(j) * (Bc(i) + Bc(j)) / 2
+        Next
+    Next
+    a = amix * pressure / (R * T) ^ (2)
+    b = bmix * pressure / (R * T)
+ 
+    Dim p As Double
+    Dim q As Double
+    Dim u As Double
+    Dim v As Double
+    Dim y1 As Double
+    Dim y2 As Double
+    Dim y3 As Double
+    Dim det As Double
+    Dim aus As Variant
+    Dim teta As Double
+    Dim zeta1 As Double
+    Dim zeta2 As Double
+    Dim zeta3 As Double
+    Dim beta As Double
+    Dim gamma As Double
+    Dim delta As Double
+    Dim pig As Double
+    Dim zeta As Double
+    pig = 3.14159265353589
+    
+    beta = - 1 + b
+    gamma = a - 2*b - 3*(b) ^ (2)
+    delta = -a * b + (b)^(2) + (b)^(3)
+     
+    p = gamma - (beta) ^ (2) / 3
+    q = 2 * (beta) ^ (3) / 27 - beta * gamma / 3 + delta
+    det = (q) ^ (2) / 4 + (p) ^ (3) / 27
+   
+    If det >= 0 Then
+        zeta1 = -q / 2 + (det) ^ (0.5)
+        zeta2 = -q / 2 - (det) ^ (0.5)
+        Dim coeff1 As Integer
+        Dim coeff2 As Integer
+        coeff1 = 1
+        coeff2 = 1
+        If zeta1 < 0 Then
+            zeta1 = -zeta1
+            coeff1 = -1
+        End If
+        If zeta2 < 0 Then
+            zeta2 = -zeta2
+            coeff2 = -1
+        End If
+        u = coeff1 * (zeta1) ^ (1 / 3)
+        v = coeff2 * (zeta2) ^ (1 / 3)
+        y1 = u + v
+        aus = y1 - beta / 3
+    Else
+        If q < 0 Then
+            teta = Atn(-2 * (-det) ^ (0.5) / q)
+        Else
+            teta = pig + Atn(-2 * (-det) ^ (0.5) / q)
+        End If
+      
+        y1 = 2 * (-p / 3) ^ (0.5) * Cos(teta / 3)
+        y2 = 2 * (-p / 3) ^ (0.5) * Cos((teta + 2 * pig) / 3)
+        y3 = 2 * (-p / 3) ^ (0.5) * Cos((teta + 4 * pig) / 3)
+        zeta1 = y1 - beta / 3
+        zeta2 = y2 - beta / 3
+        zeta3 = y3 - beta / 3
+		
+        aus = zeta1
+        If state = "L" Then
+            'LIQUID PHASE
+            If zeta2 < aus Then
+                aus = zeta2
+            End If
+            If zeta3 < aus Then
+                aus = zeta3
+            End If
+        ElseIf state = "V" Then
+            'VAPOUR PHASE
+            If zeta2 > aus Then
+            aus = zeta2
+            End If
+            If zeta3 > aus Then
+                aus = zeta3
+            End If
+        End If
+    End If
+    zeta = aus
+
+    zeta_PRmix = zeta
+End Function
+
+
 Function phi_VdWmix(indicespecie As Integer, x As Variant, NC As Integer, Tc As Variant, pc As Variant, w As Variant, T As Double, pressure As Double, state As string) As Double
     Dim amix As Double
     Dim bmix As Double
