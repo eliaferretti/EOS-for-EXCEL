@@ -1289,7 +1289,7 @@ Function hR_PR(Tc As Double, pc As Double, w As Double, T As Double, pressure As
 End Function
 
 
-Function zeta_VdWmix(x As Variant, NC As Integer, Tc As Variant, pc As Variant, w As Variant, T As Double, pressure As Double, state As string) As Double
+Function zeta_VdWmix(x As Variant, NC As Integer, Tc As Variant, pc As Variant, T As Double, pressure As Double, state As string) As Double
     Dim amix As Double
     Dim bmix As Double
     Dim a As Double
@@ -1405,7 +1405,7 @@ Function zeta_VdWmix(x As Variant, NC As Integer, Tc As Variant, pc As Variant, 
 End Function
 
 
-Function zeta_RKmix(x As Variant, NC As Integer, Tc As Variant, pc As Variant, w As Variant, T As Double, pressure As Double, state As string) As Double
+Function zeta_RKmix(x As Variant, NC As Integer, Tc As Variant, pc As Variant, T As Double, pressure As Double, state As string) As Double
     Dim amix As Double
     Dim bmix As Double
     Dim a As Double
@@ -1760,7 +1760,7 @@ Function phi_PRmix(x As Variant, NC As Integer, Tc As Variant, pc As Variant, w 
 End Function
 
 
-Function phi_VdWmix(indicespecie As Integer, x As Variant, NC As Integer, Tc As Variant, pc As Variant, w As Variant, T As Double, pressure As Double, state As string) As Double
+Function phi_VdWmix(indicespecie As Integer, x As Variant, NC As Integer, Tc As Variant, pc As Variant, T As Double, pressure As Double, state As string) As Double
     Dim amix As Double
     Dim bmix As Double
     Dim a As Double
@@ -1882,7 +1882,7 @@ Function phi_VdWmix(indicespecie As Integer, x As Variant, NC As Integer, Tc As 
 End Function
 
 
-Function phi_RKmix(indicespecie As Integer, x As Variant, NC As Integer, Tc As Variant, pc As Variant, w As Variant, T As Double, pressure As Double, state As string) As Double
+Function phi_RKmix(indicespecie As Integer, x As Variant, NC As Integer, Tc As Variant, pc As Variant, T As Double, pressure As Double, state As string) As Double
     Dim amix As Double
     Dim bmix As Double
     Dim a As Double
@@ -2252,7 +2252,7 @@ Function phi_PRmix(indicespecie As Integer, x As Variant, NC As Integer, Tc As V
 End Function
 
 
-Function hR_VdWmix(x As Variant, NC As Integer, Tc As Variant, pc As Variant, w As Variant, T As Double, pressure As Double, state As string) As Double
+Function hR_VdWmix(x As Variant, NC As Integer, Tc As Variant, pc As Variant, T As Double, pressure As Double, state As string) As Double
     Dim amix As Double
     Dim bmix As Double
     Dim a As Double
@@ -2369,7 +2369,7 @@ Function hR_VdWmix(x As Variant, NC As Integer, Tc As Variant, pc As Variant, w 
 End Function
 
 
-Function hR_RKmix(x As Variant, NC As Integer, Tc As Variant, pc As Variant, w As Variant, T As Double, pressure As Double, state As string) As Double
+Function hR_RKmix(x As Variant, NC As Integer, Tc As Variant, pc As Variant, T As Double, pressure As Double, state As string) As Double
     Dim amix As Double
     Dim bmix As Double
     Dim a As Double
