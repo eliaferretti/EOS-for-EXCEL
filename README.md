@@ -154,21 +154,23 @@ Il componente aggiuntivo contiene le seguenti funzioni:
 					
 19) phi_RKSmix:		funzione che restituisce il coefficiente di fugacità [-] previsto dall’equazione cubica RKS di un composto puro a partire dai valori index,x,NC,Tc,pc,w,T,pressure,state dove:
 					index   [-] è l'indice della specie di interesse (indice rispetto a uno dei seguenti vettori, dev'essere un numero tra 1 e NC),
-					Tc 		[K] è la temperatura critica del composto puro,
-					pc 		[Pa] è la pressione critica del composto puro,
-					w 		[-] è il fattore acentrico di Pitzer del composto puro,
+					x		[-] è il vettore delle composizioni,
+					NC		[-] è il numero di componenti (dimensione del vettore x),
+					Tc 		[K] è il vettore delle temperature critiche dei composti puri,
+					pc 		[Pa] è il vettore delle pressioni critiche dei composti puri,
 					T 		[K] è la temperatura,
 					p 		[Pa] è la pressione,
-					state 	[-] è una stringa rappresentante la fase del composto ("V" o "L").
+					state 	[-] è una stringa rappresentante la fase della miscela ("V" o "L").
 				
 20) phi_PRmix:		funzione che restituisce il coefficiente di fugacità [-] previsto dall’equazione cubica PR di un composto puro a partire dai valori index,x,NC,Tc,pc,w,T,pressure,state dove:
 					index   [-] è l'indice della specie di interesse (indice rispetto a uno dei seguenti vettori, dev'essere un numero tra 1 e NC),
-					Tc 		[K] è la temperatura critica del composto puro,
-					pc 		[Pa] è la pressione critica del composto puro,
-					w 		[-] è il fattore acentrico di Pitzer del composto puro,
+					x		[-] è il vettore delle composizioni,
+					NC		[-] è il numero di componenti (dimensione del vettore x),
+					Tc 		[K] è il vettore delle temperature critiche dei composti puri,
+					pc 		[Pa] è il vettore delle pressioni critiche dei composti puri,
 					T 		[K] è la temperatura,
 					p 		[Pa] è la pressione,
-					state 	[-] è una stringa rappresentante la fase del composto ("V" o "L").
+					state 	[-] è una stringa rappresentante la fase della miscela ("V" o "L").
 
 21) hR_VdWmix:		funzione che restituisce l' entalpia residua [J/mol] prevista dall’equazione cubica VdW di un composto puro a partire dai valori x,NC,Tc,pc,T,pressure,state dove:
 					x		[-] è il vettore delle composizioni,
@@ -210,3 +212,4 @@ Il componente aggiuntivo contiene le seguenti funzioni:
 
 
 Per qualsiasi problema o bug si contatti lo sviluppatore all'indirizzo: eliaferretti@outlook.it
+
