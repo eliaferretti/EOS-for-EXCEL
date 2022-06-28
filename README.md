@@ -211,5 +211,6 @@ Il componente aggiuntivo contiene le seguenti funzioni:
 					state 	[-] è una stringa rappresentante la fase della miscela ("V" o "L").
 
 
+Supporta il lavoro:  https://paypal.me/eliaferretti
 Per qualsiasi problema o bug si contatti lo sviluppatore all'indirizzo: eliaferretti@outlook.it
 
